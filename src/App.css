@@ -1,0 +1,66 @@
+/* background-color: #282c34; */
+
+
+h1 {
+  text-align: center;
+  color: whitesmoke;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #282c34;
+  min-height: 100vh;
+}
+
+.tablero {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  width: 440px;
+  background-color: rgb(101, 101, 255);
+  padding: 10px;
+}
+
+.tablero div {
+  border: 1px solid black;
+  width: 49px;
+  height: 49px;
+  border-radius: 50%;
+  cursor: pointer;
+
+
+}
+
+.amarilla {
+  background-color: yellow;
+}
+
+.roja {
+  background-color: red;
+}
+
+.blanco {
+  background-color: white;
+}
+
+.jugadores {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 448px;
+}
+
+.jugador1 {
+  color: red;
+  font-weight: bold;
+}
+
+.jugador2 {
+  color: yellow;
+  font-weight: bold;
+}
