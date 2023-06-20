@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 
 const filas = 6;
@@ -15,6 +15,16 @@ const App = () => {
 
   const [jugadorActual, setJugadorActual] = useState('roja');
   const [gameOver, setGameOver] = useState(false);
+  const [esVsComputadora, setEsVsComputadora] = useState(false);
+  const [contador1, setContador1] = useState(0);
+  const [contador2, setContador2] = useState(0);
+  const [showPopup, setShowPopup] = useState(false);
+
+  useEffect(() => {
+    if (esVsComputadora && jugadorActual === 'amarilla') {
+      setTimeout(hacerJugadaComputadora, 800);
+    }
+  }, [jugadorActual, esVsComputadora]);
 
   const pintarTablero = () => {
     const fichas = [];
@@ -47,13 +57,29 @@ const App = () => {
 
     if (esVictoria(fila, columna)) {
       setGameOver(true);
-      alert(`¡${jugadorActual.toUpperCase()} ha ganado!`);
+      if (jugadorActual === 'roja') {
+        setContador1(contador1 + 1);
+      } else {
+        setContador2(contador2 + 1);
+      }
+      setShowPopup(true);
     } else if (esEmpate()) {
       setGameOver(true);
-      alert('El juego ha terminado en empate.');
+      setShowPopup(true);
     } else {
       setJugadorActual(jugadorActual === 'roja' ? 'amarilla' : 'roja');
     }
+  };
+
+  const hacerJugadaComputadora = () => {
+    if (gameOver) return;
+
+    let columna;
+    do {
+      columna = Math.floor(Math.random() * columnas);
+    } while (obtenerFilaDisponible(columna) === null);
+
+    hacerJugada(columna);
   };
 
   const obtenerFilaDisponible = (columna) => {
@@ -142,6 +168,10 @@ const App = () => {
     });
     setJugadorActual('roja');
     setGameOver(false);
+    setEsVsComputadora(false);
+    setContador1(0);
+    setContador2(0);
+    setShowPopup(false);
   };
 
   return (
@@ -153,16 +183,36 @@ const App = () => {
 
       <div className="jugadores">
         <div className="jugador1">
-          <p>Jugador 1: <span>0</span></p>
+          <p>Jugador 1: <span> {contador1} </span></p>
         </div>
         <div className="jugador2">
-          <p>Jugador 2: <span>0</span></p>
+          <p>Jugador 2: <span> {contador2} </span></p>
         </div>
+      </div>
+
+      <div className="modo-juego">
+        <button
+          className={`btn-vs-computadora ${esVsComputadora ? 'active' : ''}`}
+          onClick={() => setEsVsComputadora(!esVsComputadora)}
+        >
+          Jugar contra el ordenador
+        </button>
       </div>
 
       {gameOver && (
         <div className="boton-reiniciar">
-          <button onClick={reiniciarJuego}>Reiniciar</button>
+          <button className='boton-re' onClick={reiniciarJuego}>Reiniciar</button>
+        </div>
+      )}
+
+      {showPopup && (
+        <div className="popup">
+          {jugadorActual === 'roja' ? (
+            <p>¡Jugador 1 (Roja) ha ganado!</p>
+          ) : (
+            <p>¡Jugador 2 (Amarilla) ha ganado!</p>
+          )}
+          <button onClick={reiniciarJuego}>Aceptar</button>
         </div>
       )}
     </main>

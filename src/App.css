@@ -64,3 +64,60 @@ main {
   color: yellow;
   font-weight: bold;
 }
+
+.btn-vs-computadora {
+  background-color: #0255a5;
+  border-radius: 4px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  color: #ffffff;
+  cursor: pointer;
+  font: normal 400 16px/16px Open sans;
+  min-height: 35px;
+  min-width: 100px;
+  padding: 10px 25px;
+  transition: background-color 0.25s ease-out;
+  margin-bottom: 10px;
+}
+
+.boton-re {
+  background-color: #d6c807;
+  border-radius: 4px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  color: black;
+  cursor: pointer;
+  font: normal 400 16px/16px Open sans;
+  min-height: 35px;
+  min-width: 100px;
+  padding: 10px 25px;
+  transition: background-color 0.25s ease-out;
+  margin-bottom: 10px;
+}
+
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  text-align: center;
+}
+
+.popup p {
+  margin-bottom: 10px;
+}
+
+.popup button {
+  padding: 10px 20px;
+  background-color: #4caf50;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.popup button:hover {
+  background-color: #45a049;
+}
